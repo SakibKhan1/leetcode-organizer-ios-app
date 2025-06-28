@@ -1,4 +1,3 @@
-
 import Foundation
 import SwiftUI
 
@@ -41,7 +40,6 @@ class ProblemViewModel: ObservableObject {
         saveProblems()
     }
 
-    // MARK: - Storage
     private func saveProblems() {
         if let encoded = try? JSONEncoder().encode(problems) {
             UserDefaults.standard.set(encoded, forKey: storageKey)

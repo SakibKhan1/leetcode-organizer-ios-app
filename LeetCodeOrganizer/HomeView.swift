@@ -190,12 +190,12 @@ struct SearchBar: View {
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
+                .foregroundColor(.black)
             TextField("Search problems...", text: $searchText)
                 .foregroundColor(.white)
         }
         .padding(10)
-        .background(Color.gray.opacity(0.3))
+        .background(Color.gray.opacity(1.0))
         .cornerRadius(10)
     }
 }

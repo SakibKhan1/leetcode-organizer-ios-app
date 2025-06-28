@@ -7,9 +7,8 @@ struct EditProblemView: View {
     var problem: LeetCodeProblem
 
     @State private var solutions: [SolutionEntry]
-    @State private var solutionImages: [UUID: UIImage] = [:]
     @State private var showingImagePicker = false
-    @State private var selectedSolutionIndex: Int? = nil
+    @State private var selectedSolutionIndex: Int?
 
     let complexityOptions = ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n^2)", "O(2^n)", "O(n!)"]
 
@@ -24,40 +23,38 @@ struct EditProblemView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     ForEach(solutions.indices, id: \.self) { index in
+                        let solution = $solutions[index]
                         SolutionCardView(
-                            solution: $solutions[index],
-                            image: solutionImages[solutions[index].id],
+                            solution: solution,
+                            image: loadImage(from: solution.wrappedValue.imagePath),
                             index: index,
                             onUploadTapped: {
                                 selectedSolutionIndex = index
                                 showingImagePicker = true
                             },
                             onRemoveTapped: {
-                                let removed = solutions.remove(at: index)
-                                solutionImages[removed.id] = nil
+                                solutions.remove(at: index)
                             },
                             complexityOptions: complexityOptions
                         )
                     }
 
                     if solutions.count < 5 {
-                        Button(action: {
-                            let new = SolutionEntry()
-                            solutions.append(new)
-                        }) {
-                            Text("Add Another Solution")
-                                .fontWeight(.medium)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.orange)
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
+                        Button("Add Another Solution") {
+                            solutions.append(SolutionEntry())
                         }
+                        .fontWeight(.medium)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
                     }
                 }
                 .padding()
             }
             .background(Color.black.ignoresSafeArea())
+            .navigationTitle("Edit Problem")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
@@ -68,6 +65,7 @@ struct EditProblemView: View {
                     }
                     .foregroundColor(.orange)
                 }
+
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
@@ -77,25 +75,35 @@ struct EditProblemView: View {
             .sheet(isPresented: $showingImagePicker) {
                 ImagePicker { image in
                     if let image = image, let index = selectedSolutionIndex {
-                        let id = solutions[index].id
-                        solutionImages[id] = image
+                        if let path = saveImage(image: image, id: solutions[index].id) {
+                            solutions[index].imagePath = path
+                        }
                     }
                 }
             }
         }
     }
+
+    private func saveImage(image: UIImage, id: UUID) -> String? {
+        let filename = getDocumentsDirectory().appendingPathComponent("solution_\(id).png")
+        if let data = image.pngData() {
+            try? data.write(to: filename)
+            return filename.path
+        }
+        return nil
+    }
+
+    private func loadImage(from path: String?) -> UIImage? {
+        guard let path = path else { return nil }
+        return UIImage(contentsOfFile: path)
+    }
+
+    private func getDocumentsDirectory() -> URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
 }
 
-// MARK: - Supporting Models
-
-struct SolutionEntry: Identifiable, Codable {
-    var id = UUID()
-    var notes: String = ""
-    var timeComplexity: String = "O(1)"
-    var spaceComplexity: String = "O(1)"
-}
-
-// MARK: - ImagePicker
+//MARK: - ImagePicker
 
 struct ImagePicker: UIViewControllerRepresentable {
     var onImagePicked: (UIImage?) -> Void
@@ -124,6 +132,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             picker.dismiss(animated: true)
+
             guard let provider = results.first?.itemProvider,
                   provider.canLoadObject(ofClass: UIImage.self) else {
                 onImagePicked(nil)
