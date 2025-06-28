@@ -11,25 +11,30 @@ struct TopicProgressView: View {
     ]
 
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    HStack {
-                        Spacer()
-                        Text("DSA Topics")
-                            .font(.largeTitle)
-                            .bold()
-                            .foregroundColor(.white)
-                        Spacer()
+        NavigationStack {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        HStack {
+                            Spacer()
+                            Text("DSA Topics")
+                                .font(.largeTitle)
+                                .bold()
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .padding(.top, 40)
+                        .padding(.bottom, 10)
+
+                        ForEach(leetCodeTopics, id: \.self) { topic in
+                            NavigationLink(destination: TopicDetailView(topic: topic, viewModel: viewModel)) {
+                                topicProgressView(for: topic)
+                            }
+                        }
                     }
-                    .padding(.top, 40)
-                    .padding(.bottom, 10)
-                    ForEach(leetCodeTopics, id: \.self) { topic in
-                        topicProgressView(for: topic)
-                    }
+                    .padding()
                 }
-                .padding()
             }
         }
     }
@@ -45,7 +50,7 @@ struct TopicProgressView: View {
                 .foregroundColor(.white)
                 .font(.headline)
 
-            SwiftUI.ProgressView(value: progress)
+            ProgressView(value: progress)
                 .accentColor(.orange)
                 .frame(height: 8)
 
@@ -53,5 +58,6 @@ struct TopicProgressView: View {
                 .foregroundColor(.gray)
                 .font(.caption)
         }
+        .padding(.vertical, 4)
     }
 }
