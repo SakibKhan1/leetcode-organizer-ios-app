@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct AddProblemView: View {
-    @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: ProblemViewModel
+    @Environment(\.dismiss) var dismiss
 
-    @State private var title = ""
-    @State private var selectedTopic = "Arrays & Hashing"
+    @State private var title: String = ""
+    @State private var selectedTopic: String = "Arrays & Hashing"
 
     let leetCodeTopics = [
         "Arrays & Hashing", "Two Pointers", "Sliding Window", "Stack", "Binary Search",
@@ -15,47 +15,79 @@ struct AddProblemView: View {
     ]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Add New Problem")
-                .font(.title2)
-                .bold()
-                .foregroundColor(.white)
+        NavigationView {
+            ZStack {
+                Color.black.ignoresSafeArea()
 
-            TextField("Title", text: $title)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .foregroundColor(.white)
+                ScrollView {
+                    VStack(spacing: 20) {
+                        Text("Add New Problem")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.white)
 
-            Text("Topic")
-                .foregroundColor(.white)
+                        // Problem Name
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Problem Name")
+                                .foregroundColor(.white)
+                                .font(.headline)
 
-            Picker("Topic", selection: $selectedTopic) {
-                ForEach(leetCodeTopics, id: \.self) { topic in
-                    Text(topic)
+                            TextField("e.g. Two Sum", text: $title)
+                                .padding()
+                                .background(Color(white: 0.85))
+                                .cornerRadius(10)
+                                .foregroundColor(.black)
+                        }
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Topic")
+                                .foregroundColor(.white)
+                                .font(.headline)
+
+                            Picker("", selection: $selectedTopic) {
+                                ForEach(leetCodeTopics, id: \.self) { topic in
+                                    Text(topic)
+                                        .foregroundColor(.black)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .labelsHidden()
+                            .padding(.horizontal)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 45)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .foregroundColor(.black)
+                            .accentColor(.black)
+                        }
+
+                        Button(action: {
+                            guard !title.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+                            let newProblem = LeetCodeProblem(title: title, topic: selectedTopic, isCompleted: false)
+                            viewModel.addProblem(newProblem)
+                            dismiss()
+                        }) {
+                            Text("Add Problem")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.orange)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .padding()
+                    .padding(.top, 80)
+                }
+
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                        .foregroundColor(.blue)
+                    }
                 }
             }
-            .pickerStyle(MenuPickerStyle())
-
-            Spacer()
-
-            Button(action: {
-                let newProblem = LeetCodeProblem(title: title, topic: selectedTopic, isCompleted: false)
-                viewModel.problems.append(newProblem)
-                dismiss()
-            }) {
-                Text("Add Problem")
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-            }
         }
-        .padding()
-        .background(Color.black)
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }

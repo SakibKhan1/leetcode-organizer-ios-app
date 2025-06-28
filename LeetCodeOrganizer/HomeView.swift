@@ -48,7 +48,7 @@ struct HomeView: View {
         }
         .sheet(isPresented: $showingEditSheet) {
             if let problem = selectedProblem {
-                EditProblemView(problem: problem)
+                EditProblemView(viewModel: viewModel, problem: problem)
             }
         }
         .onTapGesture {
@@ -91,9 +91,8 @@ struct HomeView: View {
         }
     }
 
-
     private func actionButtons(for problem: LeetCodeProblem) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 16) {
             ForEach(ActionType.allCases, id: \.self) { action in
                 actionButton(for: action, problem: problem)
             }
@@ -108,22 +107,23 @@ struct HomeView: View {
         Button(action: {
             handleAction(action, for: problem)
         }) {
-            VStack(spacing: 4) {
+            VStack(spacing: 6) {
                 Image(systemName: action.iconName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 28, height: 28)
+                    .frame(width: 22, height: 22) 
                     .foregroundColor(action.color)
+
                 Text(action.label)
-                    .font(.caption2)
+                    .font(.caption)
                     .foregroundColor(.white)
             }
-            .padding()
-            .frame(width: 80)
+            .frame(width: 80, height: 80)
             .background(Color.gray.opacity(0.2))
             .cornerRadius(12)
         }
     }
+
 
     private func handleAction(_ action: ActionType, for problem: LeetCodeProblem) {
         switch action {

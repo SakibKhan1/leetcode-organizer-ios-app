@@ -4,7 +4,6 @@ struct ContentView: View {
     @StateObject var viewModel = ProblemViewModel()
 
     init() {
-        // Set translucent white/gray tab bar
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
         appearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)

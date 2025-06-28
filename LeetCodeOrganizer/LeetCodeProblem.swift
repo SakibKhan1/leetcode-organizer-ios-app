@@ -5,4 +5,6 @@ struct LeetCodeProblem: Identifiable, Codable {
     var title: String
     var topic: String
     var isCompleted: Bool
+    var solutions: [SolutionEntry] = []
 }
+

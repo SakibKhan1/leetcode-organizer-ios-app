@@ -15,6 +15,16 @@ struct TopicProgressView: View {
             Color.black.ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
+                    HStack {
+                        Spacer()
+                        Text("DSA Topics")
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(.white)
+                        Spacer()
+                    }
+                    .padding(.top, 40)
+                    .padding(.bottom, 10)
                     ForEach(leetCodeTopics, id: \.self) { topic in
                         topicProgressView(for: topic)
                     }
