@@ -99,7 +99,6 @@ struct EditProblemView: View {
                 .padding()
             }
             .background(Color.black.ignoresSafeArea())
-            .navigationTitle("Edit Problem")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {

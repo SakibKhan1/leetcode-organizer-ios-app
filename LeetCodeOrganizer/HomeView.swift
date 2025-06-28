@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct HomeView: View {
@@ -6,6 +5,18 @@ struct HomeView: View {
     @State private var selectedProblem: LeetCodeProblem?
     @State private var showingAddSheet = false
     @State private var showingEditSheet = false
+    @State private var searchText = ""
+
+    var filteredProblems: [LeetCodeProblem] {
+        if searchText.isEmpty {
+            return viewModel.problems
+        } else {
+            return viewModel.problems.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText) ||
+                $0.topic.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -17,12 +28,12 @@ struct HomeView: View {
                     .foregroundColor(.white)
                     .padding(.top, 50)
 
-                SearchBar()
+                SearchBar(searchText: $searchText)
                     .padding([.horizontal, .top])
 
                 ScrollView {
                     VStack(spacing: 10) {
-                        ForEach(viewModel.problems) { problem in
+                        ForEach(filteredProblems) { problem in
                             problemCard(for: problem)
                         }
                     }
@@ -50,24 +61,28 @@ struct HomeView: View {
             Button(action: {
                 selectedProblem = (selectedProblem?.id == problem.id) ? nil : problem
             }) {
-                HStack {
-                    VStack(alignment: .leading) {
+                ZStack(alignment: .bottomTrailing) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text(problem.title)
                             .foregroundColor(.white)
                             .font(.headline)
+                            .lineLimit(2)
                         Text(problem.topic)
                             .foregroundColor(.orange)
                             .font(.subheadline)
                     }
-                    Spacer()
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(selectedProblem?.id == problem.id ? Color.orange.opacity(0.3) : Color.gray.opacity(0.2))
+                    .cornerRadius(12)
+
                     if problem.isCompleted {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
+                            .font(.system(size: 18))
+                            .padding(8)
                     }
                 }
-                .padding()
-                .background(selectedProblem?.id == problem.id ? Color.orange.opacity(0.3) : Color.gray.opacity(0.2))
-                .cornerRadius(12)
             }
 
             if selectedProblem?.id == problem.id {
@@ -75,6 +90,7 @@ struct HomeView: View {
             }
         }
     }
+
 
     private func actionButtons(for problem: LeetCodeProblem) -> some View {
         HStack(spacing: 12) {
@@ -115,6 +131,7 @@ struct HomeView: View {
             viewModel.toggleCompletion(for: problem)
             selectedProblem = nil
         case .edit:
+            selectedProblem = problem
             showingEditSheet = true
         case .delete:
             viewModel.deleteProblem(problem)
@@ -170,13 +187,13 @@ enum ActionType: CaseIterable {
 }
 
 struct SearchBar: View {
-    @State private var searchText = ""
+    @Binding var searchText: String
 
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
-            TextField("Search", text: $searchText)
+            TextField("Search problems...", text: $searchText)
                 .foregroundColor(.white)
         }
         .padding(10)

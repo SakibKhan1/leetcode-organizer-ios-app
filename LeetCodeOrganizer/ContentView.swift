@@ -3,6 +3,22 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var viewModel = ProblemViewModel()
 
+    init() {
+        // Set translucent white/gray tab bar
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
+        appearance.backgroundColor = UIColor.systemBackground
+
+        UITabBar.appearance().standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+
+        // Set selected icon/text to orange
+        UITabBar.appearance().tintColor = UIColor.orange
+    }
+
     var body: some View {
         TabView {
             HomeView(viewModel: viewModel)
@@ -23,7 +39,7 @@ struct ContentView: View {
                     Text("Settings")
                 }
         }
-        .accentColor(.orange)
+        .accentColor(.orange) // SwiftUI-level fallback
     }
 }
 
@@ -35,8 +51,4 @@ struct SettingsView: View {
                 .foregroundColor(.white)
         }
     }
-}
-
-#Preview {
-    ContentView()
 }
