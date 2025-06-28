@@ -14,7 +14,7 @@ struct TopicDetailView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 32) {
-                    //title centered and showing topic name
+                    // Title centered
                     HStack {
                         Spacer()
                         Text("Completion – \(topic)")
@@ -23,43 +23,75 @@ struct TopicDetailView: View {
                             .foregroundColor(.white)
                         Spacer()
                     }
-                    .padding(.top, 20)
-                    .padding(.bottom, 10)
+                    .padding(.top, 10)
 
-                    VStack(alignment: .leading, spacing: 10) {
+                    // Completed Section
+                    VStack(alignment: .leading, spacing: 12) {
                         Text("Completed")
                             .foregroundColor(.green)
                             .underline()
                             .font(.title2)
-                            .padding(.bottom, 4)
+                            .padding(.bottom, 5)
 
-                        if completed.isEmpty {
-                            Text("• None")
-                                .foregroundColor(.gray)
-                        } else {
-                            ForEach(completed) { problem in
-                                Text("• \(problem.title)")
-                                    .foregroundColor(.white)
+                        VStack(spacing: 10) {
+                            if completed.isEmpty {
+                                HStack {
+                                    Text("• None")
+                                        .foregroundColor(.gray)
+                                        .font(.body)
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(8)
+                            } else {
+                                ForEach(completed) { problem in
+                                    HStack {
+                                        Text("• \(problem.title)")
+                                            .foregroundColor(.white)
+                                            .font(.body)
+                                        Spacer()
+                                    }
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(8)
+                                }
                             }
                         }
                     }
                     .padding(.horizontal, 16)
 
-                    VStack(alignment: .leading, spacing: 10) {
+                    // Incomplete Section
+                    VStack(alignment: .leading, spacing: 12) {
                         Text("Incomplete")
                             .foregroundColor(.red)
                             .underline()
                             .font(.title2)
-                            .padding(.top, 10)
-                            .padding(.bottom, 4)
+                            .padding(.bottom, 5)
 
-                        if incomplete.isEmpty {
-                            Text("• None")
-                                .foregroundColor(.gray)
-                        } else {
-                            ForEach(incomplete) { problem in
-                                Text("• \(problem.title)")
-                                    .foregroundColor(.white)
+                        VStack(spacing: 10) {
+                            if incomplete.isEmpty {
+                                HStack {
+                                    Text("• None")
+                                        .foregroundColor(.gray)
+                                        .font(.body)
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(8)
+                            } else {
+                                ForEach(incomplete) { problem in
+                                    HStack {
+                                        Text("• \(problem.title)")
+                                            .foregroundColor(.white)
+                                            .font(.body)
+                                        Spacer()
+                                    }
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(8)
+                                }
                             }
                         }
                     }

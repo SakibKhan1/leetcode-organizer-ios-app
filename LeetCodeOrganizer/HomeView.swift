@@ -109,9 +109,7 @@ struct HomeView: View {
         }) {
             VStack(spacing: 6) {
                 Image(systemName: action.iconName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 22, height: 22) 
+                    .font(.system(size: 22, weight: .heavy))
                     .foregroundColor(action.color)
 
                 Text(action.label)
@@ -164,7 +162,7 @@ enum ActionType: CaseIterable {
     var iconName: String {
         switch self {
         case .complete: return "checkmark"
-        case .edit: return "pencil"
+        case .edit: return "pencil.tip"
         case .delete: return "trash"
         }
     }
