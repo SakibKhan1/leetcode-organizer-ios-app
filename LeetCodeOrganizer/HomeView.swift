@@ -19,28 +19,28 @@ struct HomeView: View {
     }
 
     var streakLevelCap: Int {
-        let completedCount = viewModel.problems.filter { $0.isCompleted }.count
-        switch completedCount {
-        case 0..<50: return 50
-        case 50..<100: return 100
-        case 100..<250: return 250
-        case 250..<500: return 500
-        default: return 1000
+        let streak = viewModel.calculateStreak()
+        switch streak {
+        case 0..<5: return 5
+        case 5..<15: return 15
+        case 15..<30: return 30
+        case 30..<60: return 60
+        default: return 100
         }
     }
 
     var streakProgress: Float {
-        let completedCount = viewModel.problems.filter { $0.isCompleted }.count
-        return Float(completedCount) / Float(streakLevelCap)
+        let streak = viewModel.calculateStreak()
+        return Float(streak) / Float(streakLevelCap)
     }
 
     var fireCount: Int {
-        let completed = viewModel.problems.filter { $0.isCompleted }.count
-        switch completed {
-        case 0..<50: return 1
-        case 50..<100: return 2
-        case 100..<250: return 3
-        case 250..<500: return 4
+        let streak = viewModel.calculateStreak()
+        switch streak {
+        case 0..<5: return 1
+        case 5..<15: return 2
+        case 15..<30: return 3
+        case 30..<60: return 4
         default: return 5
         }
     }
@@ -76,7 +76,7 @@ struct HomeView: View {
                         .frame(height: 8)
                         .padding(.horizontal)
 
-                    Text("You are at \(viewModel.problems.filter { $0.isCompleted }.count)/\(streakLevelCap) days!")
+                    Text("You are on a \(viewModel.calculateStreak())-day streak!")
                         .foregroundColor(.gray)
                         .font(.caption)
                         .padding(.leading)

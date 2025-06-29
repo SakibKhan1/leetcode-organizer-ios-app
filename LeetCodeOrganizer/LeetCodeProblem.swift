@@ -7,6 +7,7 @@ struct LeetCodeProblem: Identifiable, Codable {
     var topic: String
     var isCompleted: Bool
     var solutions: [SolutionEntry] = []
+    var dateAdded: Date = Date() // Used for streak tracking
 }
 
 struct SolutionEntry: Identifiable, Codable {
@@ -14,5 +15,5 @@ struct SolutionEntry: Identifiable, Codable {
     var notes: String = ""
     var timeComplexity: String = "O(1)"
     var spaceComplexity: String = "O(1)"
-    var imagePath: String? = nil  
+    var imagePath: String? = nil
 }

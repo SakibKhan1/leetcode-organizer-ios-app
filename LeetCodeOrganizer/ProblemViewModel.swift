@@ -24,7 +24,9 @@ class ProblemViewModel: ObservableObject {
     }
 
     func addProblem(_ problem: LeetCodeProblem) {
-        problems.append(problem)
+        var newProblem = problem
+        newProblem.dateAdded = Date()  // set the date added
+        problems.append(newProblem)
         saveProblems()
     }
 
@@ -51,5 +53,27 @@ class ProblemViewModel: ObservableObject {
            let decoded = try? JSONDecoder().decode([LeetCodeProblem].self, from: savedData) {
             self.problems = decoded
         }
+    }
+
+    func calculateStreak() -> Int {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        let uniqueDays = Set(problems.map { calendar.startOfDay(for: $0.dateAdded) })
+            .sorted(by: >)
+
+        var streak = 0
+        var currentDay = today
+
+        for day in uniqueDays {
+            if day == currentDay {
+                streak += 1
+                currentDay = calendar.date(byAdding: .day, value: -1, to: currentDay)!
+            } else {
+                break
+            }
+        }
+
+        return streak
     }
 }
