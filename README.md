@@ -46,4 +46,11 @@ The following **additional** features are implemented:
 - [x] Stylish card layout for problems, using bold fonts and accent colors  
 - [x] Custom emoji indicators (🔥, ✅) used for engaging visual feedback  
 - [x] Toolbar icons and layout spacing adjusted for consistency across devices  
-- [x] App uses `@ObservedObject` and MVVM pattern for clean architecture  
+- [x] App uses `@ObservedObject` and MVVM pattern for clean architecture
+
+## 📱 App Walkthrough
+
+Watch a quick demo of the app in action:
+
+[🎬 Watch Demo](https://github.com/SakibKhan1/leetcode-organizer-ios-app/raw/main/Media/App%20Demo)
+
