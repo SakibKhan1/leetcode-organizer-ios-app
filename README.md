@@ -50,7 +50,7 @@ The following **additional** features are implemented:
 
 ## 📱 App Demo
 
-<img src="Media/Demo.gif" alt="LeetCode Organizer Demo" width="200"/>
+![LeetCode Organizer Demo](Media/Demo.gif)
 
 
 
