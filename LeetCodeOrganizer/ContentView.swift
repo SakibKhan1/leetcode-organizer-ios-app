@@ -34,7 +34,7 @@ struct ContentView: View {
 
 
 
-            SettingsView()
+            SettingsView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "gearshape.fill")
                     Text("Settings")
@@ -44,12 +44,4 @@ struct ContentView: View {
     }
 }
 
-struct SettingsView: View {
-    var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea(edges: .top)
-            Text("Settings View")
-                .foregroundColor(.white)
-        }
-    }
-}
+

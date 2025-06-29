@@ -40,13 +40,13 @@ class ProblemViewModel: ObservableObject {
         saveProblems()
     }
 
-    private func saveProblems() {
+    func saveProblems() {
         if let encoded = try? JSONEncoder().encode(problems) {
             UserDefaults.standard.set(encoded, forKey: storageKey)
         }
     }
 
-    private func loadProblems() {
+    func loadProblems() {
         if let savedData = UserDefaults.standard.data(forKey: storageKey),
            let decoded = try? JSONDecoder().decode([LeetCodeProblem].self, from: savedData) {
             self.problems = decoded

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F60C95752E0DF5F2002F9540 /* LeetCodeOrganizerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60C95742E0DF5F2002F9540 /* LeetCodeOrganizerApp.swift */; };
+		F6DAECED2E10B5CC007F511D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DAECEC2E10B5CC007F511D /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		F60C95512E0DE9AB002F9540 /* LeetCodeOrganizerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetCodeOrganizerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60C955B2E0DE9AB002F9540 /* LeetCodeOrganizerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetCodeOrganizerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60C95742E0DF5F2002F9540 /* LeetCodeOrganizerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeOrganizerApp.swift; sourceTree = "<group>"; };
+		F6DAECEC2E10B5CC007F511D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -80,6 +82,7 @@
 		F60C953B2E0DE9A9002F9540 = {
 			isa = PBXGroup;
 			children = (
+				F6DAECEC2E10B5CC007F511D /* SettingsView.swift */,
 				F60C95742E0DF5F2002F9540 /* LeetCodeOrganizerApp.swift */,
 				F60C95462E0DE9A9002F9540 /* LeetCodeOrganizer */,
 				F60C95542E0DE9AB002F9540 /* LeetCodeOrganizerTests */,
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F60C95752E0DF5F2002F9540 /* LeetCodeOrganizerApp.swift in Sources */,
+				F6DAECED2E10B5CC007F511D /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
