@@ -52,6 +52,11 @@
 			path = LeetCodeOrganizerUITests;
 			sourceTree = "<group>";
 		};
+		F6C9000D2E10DC8600FBB402 /* Media */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Media;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				F6DAECEC2E10B5CC007F511D /* SettingsView.swift */,
+				F6C9000D2E10DC8600FBB402 /* Media */,
 				F60C95742E0DF5F2002F9540 /* LeetCodeOrganizerApp.swift */,
 				F60C95462E0DE9A9002F9540 /* LeetCodeOrganizer */,
 				F60C95542E0DE9AB002F9540 /* LeetCodeOrganizerTests */,
@@ -118,6 +124,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				F60C95462E0DE9A9002F9540 /* LeetCodeOrganizer */,
+				F6C9000D2E10DC8600FBB402 /* Media */,
 			);
 			name = LeetCodeOrganizer;
 			packageProductDependencies = (
