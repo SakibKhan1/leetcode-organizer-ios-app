@@ -1,3 +1,17 @@
+# 📱 LeetCode Organizer
+
+**LeetCode Organizer** is a SwiftUI iOS app that helps users track and manage their LeetCode practice. With features like custom tagging, streak progress tracking, multiple solution storage (with screenshots and notes), and a sleek dark-themed interface, this app makes technical interview prep more structured and visually rewarding.
+
+The app supports sorting, searching, and progress visualization across 18 NeetCode topics, along with daily reminder notifications to help users stay consistent. All data is stored locally, with options to import/export problems as JSON for easy backup.
+
+### 🔧 Built With
+- **SwiftUI** – Declarative UI framework for building modern iOS apps  
+- **Combine** – For reactive state updates with `@Published` and `@ObservedObject`  
+- **UserNotifications** – For local daily reminders  
+- **FileManager** & `@AppStorage` – For persistent local storage of problems and settings  
+- **MVVM Architecture** – Clean separation of views and logic using ViewModels  
+
+
 ## ✅ User Stories
 
 The following **required** functionality is completed:
