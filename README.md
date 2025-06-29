@@ -48,9 +48,7 @@ The following **additional** features are implemented:
 - [x] Toolbar icons and layout spacing adjusted for consistency across devices  
 - [x] App uses `@ObservedObject` and MVVM pattern for clean architecture
 
-## 📱 App Walkthrough
+## 📱 App Demo
 
-Watch a quick demo of the app in action:
-
-[🎬 Watch Demo](https://github.com/SakibKhan1/leetcode-organizer-ios-app/raw/main/Media/App%20Demo)
+![LeetCode Organizer Demo](Media/App%20Demo.gif)
 
