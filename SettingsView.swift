@@ -20,8 +20,10 @@ struct SettingsView: View {
             Form {
                 Section(header: Text("SORTING PREFERENCE").foregroundColor(.orange)) {
                     Picker("Sort Problems By", selection: $sortPreference) {
-                        ForEach(sortOptions, id: \ .self) { option in
-                            Text(option).foregroundColor(.white)
+                        ForEach(sortOptions, id: \.self) { option in
+                            Text(option)
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
@@ -33,8 +35,10 @@ struct SettingsView: View {
 
                 Section(header: Text("NOTIFICATION SETTINGS").foregroundColor(.orange)) {
                     Picker("Reminder Frequency", selection: $notificationFrequency) {
-                        ForEach(notificationOptions, id: \ .self) { option in
-                            Text(option).foregroundColor(.white)
+                        ForEach(notificationOptions, id: \.self) { option in
+                            Text(option)
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
@@ -132,7 +136,7 @@ struct SettingsView: View {
         case "By Completed":
             viewModel.problems.sort { ($0.isCompleted ? 0 : 1) < ($1.isCompleted ? 0 : 1) }
         case "By Time Added":
-            viewModel.loadProblems() // restore natural order
+            viewModel.loadProblems()
         default:
             break
         }

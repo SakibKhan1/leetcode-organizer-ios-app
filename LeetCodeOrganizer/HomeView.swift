@@ -18,6 +18,33 @@ struct HomeView: View {
         }
     }
 
+    var streakLevelCap: Int {
+        let completedCount = viewModel.problems.filter { $0.isCompleted }.count
+        switch completedCount {
+        case 0..<50: return 50
+        case 50..<100: return 100
+        case 100..<250: return 250
+        case 250..<500: return 500
+        default: return 1000
+        }
+    }
+
+    var streakProgress: Float {
+        let completedCount = viewModel.problems.filter { $0.isCompleted }.count
+        return Float(completedCount) / Float(streakLevelCap)
+    }
+
+    var fireCount: Int {
+        let completed = viewModel.problems.filter { $0.isCompleted }.count
+        switch completed {
+        case 0..<50: return 1
+        case 50..<100: return 2
+        case 100..<250: return 3
+        case 250..<500: return 4
+        default: return 5
+        }
+    }
+
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.black.ignoresSafeArea()
@@ -30,6 +57,31 @@ struct HomeView: View {
 
                 SearchBar(searchText: $searchText)
                     .padding([.horizontal, .top])
+
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("Streak Progress")
+                            .foregroundColor(.orange)
+                            .font(.subheadline)
+                        ForEach(0..<fireCount, id: \ .self) { _ in
+                            Image(systemName: "flame.fill")
+                                .foregroundColor(.orange)
+                        }
+                    }
+                    .padding(.leading)
+                    .padding(.top, 10)
+
+                    ProgressView(value: streakProgress)
+                        .accentColor(.orange)
+                        .frame(height: 8)
+                        .padding(.horizontal)
+
+                    Text("You are at \(viewModel.problems.filter { $0.isCompleted }.count)/\(streakLevelCap) days!")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                        .padding(.leading)
+                }
+                .padding(.bottom, 10)
 
                 ScrollView {
                     VStack(spacing: 10) {
@@ -93,7 +145,7 @@ struct HomeView: View {
 
     private func actionButtons(for problem: LeetCodeProblem) -> some View {
         HStack(spacing: 16) {
-            ForEach(ActionType.allCases, id: \.self) { action in
+            ForEach(ActionType.allCases, id: \ .self) { action in
                 actionButton(for: action, problem: problem)
             }
         }
@@ -121,7 +173,6 @@ struct HomeView: View {
             .cornerRadius(12)
         }
     }
-
 
     private func handleAction(_ action: ActionType, for problem: LeetCodeProblem) {
         switch action {

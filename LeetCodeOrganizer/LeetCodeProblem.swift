@@ -14,5 +14,5 @@ struct SolutionEntry: Identifiable, Codable {
     var notes: String = ""
     var timeComplexity: String = "O(1)"
     var spaceComplexity: String = "O(1)"
-    var imagePath: String? = nil  // Local file path to the image
+    var imagePath: String? = nil  
 }
