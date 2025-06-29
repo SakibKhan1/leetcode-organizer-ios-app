@@ -50,6 +50,6 @@ The following **additional** features are implemented:
 
 ## 📱 App Demo
 
-![LeetCode Organizer Demo](Media/demo.gif)
+![LeetCode Organizer Demo](Media/Demo.gif)
 
 
