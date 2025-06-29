@@ -22,10 +22,13 @@ struct SettingsView: View {
                     Picker("Sort Problems By", selection: $sortPreference) {
                         ForEach(sortOptions, id: \.self) { option in
                             Text(option)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                                 .fontWeight(.bold)
                         }
                     }
+                    .pickerStyle(MenuPickerStyle())
+                    .tint(.black)
+
                     .pickerStyle(MenuPickerStyle())
                     .onChange(of: sortPreference) { _ in
                         applySortPreference()
@@ -37,10 +40,13 @@ struct SettingsView: View {
                     Picker("Reminder Frequency", selection: $notificationFrequency) {
                         ForEach(notificationOptions, id: \.self) { option in
                             Text(option)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                                 .fontWeight(.bold)
                         }
                     }
+                    .pickerStyle(MenuPickerStyle())
+                    .tint(.black)
+
                     .pickerStyle(MenuPickerStyle())
                 }
                 .listRowBackground(Color(white: 0.8))
