@@ -1,4 +1,4 @@
-# 📱 LeetCode Organizer
+# LeetCode Organizer
 
 **LeetCode Organizer** is a SwiftUI iOS app that helps users track and manage their LeetCode practice. With features like custom tagging, streak progress tracking, multiple solution storage (with screenshots and notes), and a sleek dark-themed interface, this app makes technical interview prep more structured and visually rewarding.
 
