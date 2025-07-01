@@ -52,7 +52,17 @@ The following **additional** features are implemented:
 
 <img src="Media/Demo.gif" alt="LeetCode Organizer Demo" width="250"/>
 
+---
 
+## 🔐 Privacy Policy
 
+**LeetCode Organizer** does **not** collect or transmit any personal information or user data.
 
+- All app data (including problems, tags, solutions, screenshots, and settings) is stored **locally** on your device.
+- No data is transmitted to external servers or third-party services.
+- Notification permissions are used **only** for scheduling local reminders on your device.
+- The app does **not** use analytics, advertising, or tracking of any kind.
 
+If you have any questions about this policy or encounter privacy concerns, feel free to reach out via GitHub.
+
+---
