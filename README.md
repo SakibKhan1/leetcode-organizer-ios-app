@@ -4,6 +4,8 @@
 
 The app supports sorting, searching, and progress visualization across 18 NeetCode topics, along with daily reminder notifications to help users stay consistent. All data is stored locally, with options to import/export problems as JSON for easy backup.
 
+Here's a link to my app on the App Store 👉: https://apps.apple.com/us/app/leetcode-organizer/id6748037339
+
 ### 🔧 Built With
 - **SwiftUI** – Declarative UI framework for building modern iOS apps  
 - **Combine** – For reactive state updates with `@Published` and `@ObservedObject`  
