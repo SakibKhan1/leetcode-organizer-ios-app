@@ -1,3 +1,4 @@
+
 import SwiftUI
 import PhotosUI
 
@@ -54,6 +55,9 @@ struct EditProblemView: View {
                 .padding()
             }
             .background(Color.black.ignoresSafeArea())
+            .onTapGesture {
+                UIApplication.endEditing()
+            }
             .navigationTitle("Edit Problem")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -103,8 +107,6 @@ struct EditProblemView: View {
     }
 }
 
-//MARK: - ImagePicker
-
 struct ImagePicker: UIViewControllerRepresentable {
     var onImagePicked: (UIImage?) -> Void
 
@@ -145,5 +147,11 @@ struct ImagePicker: UIViewControllerRepresentable {
                 }
             }
         }
+    }
+}
+
+extension UIApplication {
+    static func endEditing() {
+        shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

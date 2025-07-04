@@ -36,9 +36,22 @@
 		F6DAECEC2E10B5CC007F511D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F67E5BC02E1385A100E7E691 /* Exceptions for "LeetCodeOrganizer" folder in "LeetCodeOrganizer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F60C95432E0DE9A9002F9540 /* LeetCodeOrganizer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F60C95462E0DE9A9002F9540 /* LeetCodeOrganizer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F67E5BC02E1385A100E7E691 /* Exceptions for "LeetCodeOrganizer" folder in "LeetCodeOrganizer" target */,
+			);
 			path = LeetCodeOrganizer;
 			sourceTree = "<group>";
 		};
@@ -418,6 +431,8 @@
 				DEVELOPMENT_TEAM = 5W8KK3CYXP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LeetCodeOrganizer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "LeetCode Organizer";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -446,6 +461,8 @@
 				DEVELOPMENT_TEAM = 5W8KK3CYXP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LeetCodeOrganizer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "LeetCode Organizer";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

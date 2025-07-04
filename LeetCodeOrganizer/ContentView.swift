@@ -14,7 +14,6 @@ struct ContentView: View {
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
 
-        // Set selected icon/text to orange
         UITabBar.appearance().tintColor = UIColor.orange
     }
 
@@ -40,7 +39,7 @@ struct ContentView: View {
                     Text("Settings")
                 }
         }
-        .accentColor(.orange) // SwiftUI-level fallback
+        .accentColor(.orange)
     }
 }
 

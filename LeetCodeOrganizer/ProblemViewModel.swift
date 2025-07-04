@@ -11,6 +11,8 @@ class ProblemViewModel: ObservableObject {
     @Published var problems: [LeetCodeProblem] = []
 
     private let storageKey = "LeetCodeProblems"
+    private let streakKey = "streakCount"
+    private let lastActiveKey = "lastActiveDate"
 
     init() {
         loadProblems()
@@ -25,9 +27,10 @@ class ProblemViewModel: ObservableObject {
 
     func addProblem(_ problem: LeetCodeProblem) {
         var newProblem = problem
-        newProblem.dateAdded = Date()  // set the date added
+        newProblem.dateAdded = Date()
         problems.append(newProblem)
         saveProblems()
+        updateStreakIfNeeded()
     }
 
     func updateProblem(_ updatedProblem: LeetCodeProblem) {
@@ -55,25 +58,33 @@ class ProblemViewModel: ObservableObject {
         }
     }
 
+    // Returns the current streak from UserDefaults
     func calculateStreak() -> Int {
+        return UserDefaults.standard.integer(forKey: streakKey)
+    }
+
+    // Updates the streak if a new problem is added today
+    private func updateStreakIfNeeded() {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: today)!
 
-        let uniqueDays = Set(problems.map { calendar.startOfDay(for: $0.dateAdded) })
-            .sorted(by: >)
+        let lastActive = UserDefaults.standard.object(forKey: lastActiveKey) as? Date
+        var streak = UserDefaults.standard.integer(forKey: streakKey)
 
-        var streak = 0
-        var currentDay = today
-
-        for day in uniqueDays {
-            if day == currentDay {
+        if let lastDate = lastActive {
+            if calendar.isDate(lastDate, inSameDayAs: today) {
+                return
+            } else if calendar.isDate(lastDate, inSameDayAs: yesterday) {
                 streak += 1
-                currentDay = calendar.date(byAdding: .day, value: -1, to: currentDay)!
             } else {
-                break
+                streak = 1
             }
+        } else {
+            streak = 1
         }
 
-        return streak
+        UserDefaults.standard.set(today, forKey: lastActiveKey)
+        UserDefaults.standard.set(streak, forKey: streakKey)
     }
 }
